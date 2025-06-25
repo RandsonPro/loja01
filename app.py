@@ -18,9 +18,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'sua_chave_super_secreta'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
 
-# Inicializa o banco
-db = SQLAlchemy(app)
-
 # Importa os modelos e o db que foi criado em models.py
 from models import db, Usuario, Produto, Cliente, Pedido, Caixa
 
