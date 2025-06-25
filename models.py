@@ -57,8 +57,3 @@ class Caixa(db.Model):
     data_fechamento = db.Column(db.DateTime)
 
 
-from app import db
-
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    nome = db.Column(db.String(100), nullable=False)
