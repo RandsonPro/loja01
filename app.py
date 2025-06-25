@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify, session
+from flask import Flask, flash, render_template, request, redirect, url_for, jsonify, session
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from datetime import datetime, timedelta
@@ -205,6 +205,14 @@ def cancelar_venda(id):
     db.session.commit()
     return {"success": True}, 200
 
+@app.route('/excluir_todas_vendas', methods=['POST'])
+def excluir_todas_vendas():
+    # Exclui todas as vendas do banco de dados
+    db.session.query(Pedido).delete()
+    db.session.commit()
+    flash("Todas as vendas foram excluídas com sucesso!", "success")
+    return redirect(url_for('vendas'))
+
 # ------
 # from flask import session, render_template, request, redirect, url_for, jsonify
 @app.route("/pedir_senha")
@@ -315,6 +323,19 @@ def fechar_caixa(id):
 
     db.session.commit()
     return redirect(url_for("controle_caixa"))
+
+@app.route('/excluir_caixas', methods=['POST'])
+def excluir_todos_caixas():
+    try:
+        Caixa.query.delete()
+        db.session.commit()
+        flash("✅ Todos os registros de caixa foram excluídos com sucesso!", "success")
+    except Exception as e:
+        db.session.rollback()
+        flash(f"❌ Erro ao excluir caixas: {str(e)}", "danger")
+
+    return redirect(url_for('caixa'))
+
 
 @app.route("/controle_caixa")
 def controle_caixa():

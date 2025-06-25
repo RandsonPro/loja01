@@ -75,6 +75,7 @@
                     <button class="btn btn-warning btn-sm" onclick="cancelarVenda('{{ pedido.id }}')">
                         ❌ Cancelar Venda
                     </button>
+                    
                     {% endif %}
                 </td>
             </tr>
@@ -82,8 +83,18 @@
         </tbody>
     </table>
 </div>
+<form method="POST" action="{{ url_for('excluir_todas_vendas') }}" onsubmit="return confirmarExclusao();">
+    <input type="password" name="senha_master" class="form-control mb-2" placeholder="🔐 Digite a senha master" required>
+    <button type="submit" class="btn btn-danger">🗑️ Excluir Todas as Vendas</button>
+</form>
 
 <!-- 🔗 Importação de Scripts -->
 <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 
+<script>
+    function confirmarExclusao() {
+        return confirm("⚠️ Tem certeza que deseja excluir TODAS as vendas? Esta ação é irreversível.");
+    }
+    </script>
+        
 {% endblock %}
