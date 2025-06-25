@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 
+
 # ---------------------- Modelo de Usuário ---------------------- #
 class Usuario(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -55,5 +56,4 @@ class Caixa(db.Model):
     saldo_final = db.Column(db.Float, default=0.0)
     status = db.Column(db.String(20), default="aberto")  # 🔹 "aberto" ou "fechado"
     data_fechamento = db.Column(db.DateTime)
-
 

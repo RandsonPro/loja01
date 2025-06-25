@@ -13,7 +13,7 @@ import os
 app = Flask(__name__)
 
 # 🔗 Conexão direta com o banco PostgreSQL da Render
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://loja1_user:GXDaSjMFvYfEUx84TmgV8yoorzWUYpUtDAdpg-d1de513e5du@dpg-f3tc12vv3ddc73bt8o70-a.oregon-postgres.render.com/loja1'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://loja1_user:GXDaSjMFvYFfUx84TmgV8yoorWUYpUtD@dpg-d1de5l3e5dus73bagpqg-a.oregon-postgres.render.com/loja1'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'sua_chave_super_secreta'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
