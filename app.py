@@ -5,43 +5,30 @@ from datetime import datetime, timedelta
 import os
 import json
 
-from models import Caixa, Pedido, Produto, db
-
-from flask import Flask
+from flask import Flask, render_template, request, redirect, url_for, jsonify, session
 from flask_sqlalchemy import SQLAlchemy
-from dotenv import load_dotenv
-import os
 from datetime import timedelta
-
-# Carrega variáveis de ambiente do arquivo .env
-load_dotenv()
-
-# Inicializa a instância do Flask
-app = Flask(__name__)
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from dotenv import load_dotenv
 import os
-from datetime import timedelta
 
-# Carrega as variáveis do .env
-load_dotenv()
-
-# Instancia o Flask
 app = Flask(__name__)
 
-# Configurações principais
-app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL", "sqlite:///fallback.db")
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+# 🔗 Conexão direta com o banco PostgreSQL da Render
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://loja1_user:GXDaSjMFvYfEUx84TmgV8yoorzWUYpUtDAdpg-d1de513e5du@dpg-f3tc12vv3ddc73bt8o70-a.oregon-postgres.render.com/loja1'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = 'sua_chave_super_secreta'
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=5)
 
-app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "chave_padrao_segura")
-app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(minutes=5)
+# Inicializa o banco
 db = SQLAlchemy(app)
 
+# Importa os modelos e o db que foi criado em models.py
+from models import db, Usuario, Produto, Cliente, Pedido, Caixa
+
+# Inicializa o banco com o app
+db.init_app(app)
+
+# Variável extra
 SENHA_MASTER = os.getenv("SENHA_MASTER", "Vix@loja1!")
-
-# Inicializa o SQLAlchemy com as configurações definidas
-db = SQLAlchemy(app)
 
 # ---------------------- ROTA PRINCIPAL ---------------------- #
 @app.route("/")
