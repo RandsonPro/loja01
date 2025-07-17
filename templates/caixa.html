@@ -73,7 +73,7 @@
 
 <!-- 🔗 Importação de Scripts -->
 <script src="{{ url_for('static', filename='script.js') }}" defer></script>
-<form method="POST" action="{{ url_for('excluir_todos_caixas') }}" onsubmit="return confirmarExclusao();">
+<form method="POST" action="{{ url_for('home') }}" onsubmit="return confirmarExclusao();">
     <input type="password" name="senha_master" class="form-control mb-2" placeholder="🔐 Digite a senha master" required>
     <button type="submit" class="btn btn-danger">
         🗑️ Excluir Todos os Caixas
